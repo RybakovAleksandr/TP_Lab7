@@ -1,5 +1,4 @@
 
-import uuid
 from .OrderStatus import OrderStatus
 from .Money import Money
 from .OrderLine import OrderLine
