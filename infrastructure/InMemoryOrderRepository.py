@@ -9,7 +9,7 @@ class InMemoryOrderRepository(OrderRepository):
         self.orders: Dict[str, Order] = {}
     
     def getById(self, orderId: str) -> Order:
-        return self.orders[orderId]
+        return self.orders.get(orderId)
     
     def save(self, order: Order):
         self.orders[order.getId()] = order
