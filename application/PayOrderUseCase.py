@@ -1,5 +1,4 @@
 
-from domain.Order import Order
 from interfaces.OrderRepository import OrderRepository
 from interfaces.PaymentGateway import PaymentGateway
 from .PaymentResult import PaymentResult
