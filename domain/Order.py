@@ -37,7 +37,7 @@ class Order:
     
     def removeLine(self, productId: str):
         if self.status == OrderStatus.PAID:
-            raise Exception("Cannot change pid order")
+            raise Exception("Cannot change paid order")
         self.lines = [line for line in self.lines if line.productId != productId]
         self.totalAmount = self.calculateTotal()
 
