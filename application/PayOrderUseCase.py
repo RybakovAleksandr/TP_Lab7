@@ -10,12 +10,15 @@ class PayOrderUseCase:
         self.paymentGateway = paymentGateway
     
     def execute(self, orderId: str) -> PaymentResult:
-        order = self.orderRepository.getById(orderId)
-        if order is None:
-            return PaymentResult(False, "Order not found", orderId)
-        order.pay()
-        paymentSuccess = self.paymentGateway.charge(orderId, order.getTotalAmount())
-        if not paymentSuccess:
-            return PaymentResult(False, "Payment failed", orderId)
-        self.orderRepository.save(order)
-        return PaymentResult(True, "Payment successful", orderId)
+        try:
+            order = self.orderRepository.getById(orderId)
+            if order is None:
+                return PaymentResult(False, "Order not found", orderId)
+            order.pay()
+            paymentSuccess = self.paymentGateway.charge(orderId, order.getTotalAmount())
+            if not paymentSuccess:
+                return PaymentResult(False, "Payment failed", orderId)
+            self.orderRepository.save(order)
+            return PaymentResult(True, "Payment successful", orderId)
+        except Exception as e:
+            return PaymentResult(False, str(e), orderId)
