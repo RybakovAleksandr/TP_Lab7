@@ -31,7 +31,7 @@ class Order:
     
     def addLine(self, line: OrderLine):
         if self.status == OrderStatus.PAID:
-            raise Exception("Cannot change pid order")
+            raise Exception("Cannot change paid order")
         self.lines.append(line)
         self.totalAmount = self.calculateTotal()
     
